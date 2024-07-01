@@ -17,7 +17,7 @@ router.post('/signup', async (req, res) => {
     const user = new User({ phone, password });
     await user.save();
 
-    res.status(201).json({ message: 'User created successfully' });
+    res.status(201).json({ message: 'User created successfully', userId: user._id });
   } catch (error) {
     if (error.name === 'ValidationError') {
       // Validation error
@@ -45,11 +45,26 @@ router.post('/signin', async (req, res) => {
       return res.status(401).json({ error: 'Incorrect password' });
     }
 
-    res.status(200).json({ message: 'Signin successful' });
+    res.status(200).json({ message: 'Signin successful', userId: user._id });
   } catch (error) {
     console.error('Error during signin:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
 
+// Route to get user details by userId
+router.get('/:userId', async (req, res) => {
+  try {
+    const user = await User.findById(req.params.userId);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    res.json(user);
+  } catch (error) {
+    console.error('Error fetching user details:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 module.exports = router;
+

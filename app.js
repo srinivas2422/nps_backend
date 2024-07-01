@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const userRoute = require('./routes/auth')
+const propertyRoute = require('./routes/property')
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -13,6 +14,7 @@ const port = process.env.PORT || 5000;
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
+app.use('/uploads', express.static('uploads')); // Serve uploaded files
 
 // MongoDB Atlas URI
 const uri = process.env.ATLAS_URI;
@@ -31,6 +33,7 @@ mongoose.connect(uri)
 
 // Example route to handle POST request
 app.use('/api/users', userRoute);
+app.use('/api/usersprop', propertyRoute);
 
 // Start server
 app.listen(port, () => {
