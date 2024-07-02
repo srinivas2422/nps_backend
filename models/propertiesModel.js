@@ -1,34 +1,3 @@
-// const mongoose = require('mongoose');
-
-// const propertySchema = new mongoose.Schema({
-//     imagePath: {
-//         type: String,
-//         required: true,
-//     },
-//     location: {
-//         type: String,
-//         required: true,
-//     },
-//     description: {
-//         type: String,
-//         required: true,
-//     },
-//     rent: {
-//         type: Number,
-//         required: true,
-//     },
-//     userId: {
-//         type: mongoose.Schema.Types.ObjectId,
-//         ref: 'User',
-//         required: true,
-//     }
-// },{ collection: 'UserProperties',
-//     timestamps: true
-//  });
-
-// const Property = mongoose.model('Property', propertySchema);
-
-// module.exports = Property;
 
 const mongoose = require('mongoose');
 
