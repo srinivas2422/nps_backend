@@ -29,7 +29,7 @@ const propertySchema = new mongoose.Schema({
     furnishing: {
         type: String,
         required: true,
-        enum: ['Fully Furnished', 'Semi Furnished', 'Unfurnished'],
+        enum: ['FullyFurnished', 'SemiFurnished', 'Unfurnished'],
     },
     apartmentType: {
         type: String,

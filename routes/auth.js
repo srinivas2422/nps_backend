@@ -66,5 +66,29 @@ router.get('/:userId', async (req, res) => {
   }
 });
 
+router.put('/:id', async (req, res) => {
+  const { id } = req.params;
+  const { name, phone, password } = req.body;
+
+  try {
+    const user = await User.findById(id);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Update user fields
+    if (name !== undefined) user.name = name;
+    if (phone !== undefined) user.phone = phone;
+    if (password !== undefined) user.password = password;
+
+    await user.save();
+
+    res.status(200).json({ message: 'User details updated successfully', user });
+  } catch (error) {
+    res.status(500).json({ message: 'Error updating user details', error });
+  }
+});
+
 module.exports = router;
 
